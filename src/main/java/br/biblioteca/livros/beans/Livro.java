@@ -1,10 +1,14 @@
 package br.biblioteca.livros.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,6 +27,9 @@ public class Livro {
 	@NotNull()
 	@Min(value = 10)
 	private int quantidadePaginas;
+	
+	@OneToMany(mappedBy = "livro")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
 
 	public Long getId() {
 		return id;
