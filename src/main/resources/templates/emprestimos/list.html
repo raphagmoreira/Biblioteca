@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+
+<script type="text/javascript" src="/js/emprestimos/list.js"></script>
+
+</head>
+<body>
+	<h1 layout:fragment="header">
+		Empréstimos
+	</h1>
+
+	<div layout:fragment="content" class="container">
+		
+		<div align="right">
+			<a th:href="@{/emprestimos/novo}"  class="btn btn-info"><i class="glyphicon glyphicon-plus"> Novo Empréstimo</i></a>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Livro</td>
+					<th scope="col">Data Empréstimo</td>
+					<th scope="col">Data Devolução Prazo</td>
+					<th scope="col">Data Devolução</td>
+					<th scope="col">Emprestado para</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="emprestimo : ${emprestimos}">
+					<th scope="row" th:text="${emprestimo.livro.nome}">Livro</th>
+					<th scope="row" th:text="${emprestimo.dataEmprestimoFormatada}">Data Empréstimo</th>
+					<th scope="row" th:text="${emprestimo.dataDevolucao}">Data Devolução Prazo</th>
+					<th scope="row" th:text="${emprestimo.dataEntrega}">Data Devolução</th>
+					<th scope="row" th:text="${emprestimo.usuarioEmprestimo.username}">Emprestado para</th>
+					<td><a href="#" th:href="@{'/emprestimos/alterar/'+${emprestimo.id}}"> Alterar </a></td>
+					<td><a href="#" th:href="@{'/emprestimos/excluir/'+${emprestimo.id}}"> Excluir </a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

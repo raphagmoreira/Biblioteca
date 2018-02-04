@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="#" th:href="@{/emprestimos/list}">Emprestimos</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Inclusão de Empréstimos</li>
+	  </ol>
+	</nav>
+
+	<div layout:fragment="content" class="container">
+	
+		<form id="livroForm" th:action="@{/emprestimos/(form)}" method="post" th:object="${emprestimo}" action="#" enctype="multipart/form-data">
+			<input type="hidden"  th:field="*{id}" />
+			
+			<div class="form-group row">
+				<div class="col-sm-10">
+	      			<label for="staticPrazoDevolucao" class="col-sm-2 col-form-label">Data Prazo Devolução</label>
+	      			
+	      			<input type="text" th:field="*{dataDevolucao}" class="form-control-plaintext" id="staticDataDevolucao" >
+	    		</div>
+	    		
+	    		<div class="col-sm-10">
+	      			<label for="staticDataEntrega" class="col-sm-2 col-form-label">Data Entrega</label>
+	      			
+	      			<input type="text" th:field="*{dataEntrega}" class="form-control-plaintext" id="staticDataEntrega" >
+	    		</div>
+	    		
+	    		<div class="col-sm-10">
+					<label for="staticLivro" class="col-sm-2 col-form-label">Livro</label>
+					
+					<select th:field="*{livro}">
+				  		<option th:each="livro : ${livros}"  th:value="${livro.id}" th:text="${livro.nome}">Livro</option>
+					</select>
+				</div>				    
+    			
+				<div class="col-sm-10">
+				    <label for="staticUsuario" class="col-sm-2 col-form-label">Emprestar para</label>
+
+					<select th:field="*{usuarioEmprestimo}">
+				  		<option th:each="usuario : ${usuarios}"  th:value="${usuario.id}" th:text="${usuario.username}">Usuário</option>
+					</select>
+			    </div>
+    			
+    			<center>
+    				<button type="submit" class="btn btn-info">Gravar</button>
+    			</center>
+
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>
